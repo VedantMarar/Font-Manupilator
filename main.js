@@ -1,3 +1,9 @@
+nose_x = 0;
+nose_y = 0;
+rwx = 0;
+lwx = 0;
+diff = 0;
+
 function setup(){
     canvas =    createCanvas(550,550);
     canvas.position(560,150);
@@ -9,6 +15,10 @@ function setup(){
 
 function draw(){
     background('#F0F8FF');
+    fill('turquoise');
+    textSize(diff);
+    text('Anonymous',50,400);
+    document.getElementById("square_side").innerHTML ="The font size is" + diff;
 }
 
 function modelLoaded(){
@@ -18,5 +28,12 @@ function modelLoaded(){
 function gotPoses(results){
     if(results.length>0){
     console.log(results);
+    nose_x = results[0].pose.nose.x;
+    nose_y = results[0].pose.nose.y;
+    console.log("nose_x="+nose_x+"nose_y="+nose_y);
+    rwx = results[0].pose.rightWrist.x;
+    lwx = results[0].pose.leftWrist.x;
+    diff =floor(rwx-lwx) 
+    console.log("Left wrist x="+lwx+"Right wrist x="+rwx+"The difference="+diff);
     }
 }
